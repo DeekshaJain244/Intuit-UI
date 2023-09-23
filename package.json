@@ -1,0 +1,38 @@
+{
+  "name": "Portal-ts",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "gen-api": "npx openapi-typescript-codegen --input .\\packages\\api\\_api.json --output .\\packages\\api --client axios",
+    "gen-auth": "npx openapi-typescript-codegen --input .\\packages\\auth\\_auth.json --output .\\packages\\auth --client axios"
+  },
+  "devDependencies": {
+    "@mdi/js": "^7.0.96",
+    "axios": "^1.5.0",
+    "nuxt": "^3.7.0",
+    "openapi-typescript-codegen": "^0.25.0",
+    "sass": "^1.64.1",
+    "typescript": "^5.0.4",
+    "typescript-eslint": "^0.0.1-alpha.0",
+    "vite-plugin-vuetify": "^1.0.2"
+  },
+  "dependencies": {
+    "@hypernym/nuxt-anime": "^2.1.0",
+    "@mdi/font": "^7.2.96",
+    "@nuxtjs/google-fonts": "^3.0.2",
+    "@nuxtjs/i18n": "^8.0.0-beta.12",
+    "@pinia/nuxt": "^0.4.11",
+    "@vvo/tzdb": "^6.108.0",
+    "centrifuge": "2.8.5",
+    "izitoast": "^1.4.0",
+    "moment-timezone": "^0.5.43",
+    "pinia": "^2.1.6",
+    "vue-google-maps-community-fork": "^0.3.1",
+    "vue-simple-acl": "^2.0.2",
+    "vuetify": "^3.3.14"
+  }
+}

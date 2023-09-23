@@ -1,0 +1,3618 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "![MEGH Computing](https://megh.com/wp-content/uploads/2023/02/vas_system_configuration-1.png)\n\n# MEGH APIs\n\n**API documentation.**\n",
+    "title": "Auth APIs",
+    "termsOfService": "https://megh.com/terms/",
+    "contact": {
+      "name": "Auth Support",
+      "url": "https://support.megh.com/",
+      "email": "support@megh.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0"
+  },
+  "host": "localhost:8002",
+  "basePath": "/api/v1",
+  "paths": {
+    "/auth/client/create": {
+      "put": {
+        "description": "### Auth Client Create API.\n\n*Sample INPUT*\n\n```json\n{\n  \"auth_client_id\": \"string\",\n  \"allowed_audience\": [],\n  \"grant_type\": [],\n  \"response_type\": [],\n  \"scope\": [],\n  \"provider\": \"string\",\n  \"name\": \"string\",\n  \"client_secret\":\"string\",\n  \"redirect_uri\": []\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Client created\",\n  \"response\": null,\n  \"response_code\": 201\n}\n```\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Client"
+        ],
+        "summary": "Auth Client Create",
+        "parameters": [
+          {
+            "description": "Client Create Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_client.clientCreateReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/client/delete": {
+      "delete": {
+        "description": "### Auth Client Delete API.\n\n*Sample INPUT*\n\n```json\n{\n  \"client_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Client deleted\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```\n",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Client"
+        ],
+        "summary": "Auth Client Delete",
+        "parameters": [
+          {
+            "description": "Client Delete Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_client.clientIDReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/client/list": {
+      "get": {
+        "description": "### Auth Client List API.\n\n*Sample INPUT*\n\n```json\n{\n \"is_secret\": false,\n  \"client_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Client List\",\n  \"response\": {\n    \"client\": [\n      {\n        \"client_id\": \"string\",\n        \"auth_client_id\": \"string\",\n        \"allowed_audience\": [],\n        \"grant_type\": [],\n        \"response_type\": [],\n        \"scope\": [],\n        \"provider\": \"string\",\n        \"name\": \"string\",\n        \"client_secret\": \"string\",\n        \"redirect_uri\": []\n      }\n    ]\n  },\n  \"response_code\": 200\n}\n```\n",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Client"
+        ],
+        "summary": "Auth Client List",
+        "parameters": [
+          {
+            "type": "boolean",
+            "description": "Reveal Secret",
+            "name": "is_secret",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "Reveal Secret for Client ID",
+            "name": "client_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "allOf": [
+                        {
+                          "$ref": "#/definitions/sts_internal_auth_api_client.clientListResp"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "client": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/definitions/sts_internal_auth_api_client.clientUpdateReq"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/client/update": {
+      "patch": {
+        "description": "### Auth Client Update API.\n\n*Sample INPUT*\n\n```json\n{\n  \"client_id\": \"string\",\n  \"auth_client_id\": \"string\",\n  \"allowed_audience\": [],\n  \"grant_type\": [],\n  \"response_type\": [],\n  \"scope\": [],\n  \"provider\": \"string\",\n  \"name\": \"string\",\n  \"client_secret\":\"string\",\n  \"redirect_uri\": []\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Client updated\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```\n",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Client"
+        ],
+        "summary": "Auth Client update",
+        "parameters": [
+          {
+            "description": "Client Update Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_client.clientUpdateReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/config/update": {
+      "post": {
+        "description": "### Auth Config Update API.\n\n*Sample INPUT*\n\n```json\n{\n  \"domain\": \"string\",\n  \"root\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Auth configuration updated\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/confirm": {
+      "post": {
+        "description": "Confirm a new user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Confirm a new user",
+        "operationId": "confirm",
+        "parameters": [
+          {
+            "description": "Confirm request",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_x_confirm.confirmReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "Login",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "parameters": [
+          {
+            "description": "Login request",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/internal_auth_x_login.loginReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "delete": {
+        "description": "Logout the user",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout the user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/auth/recover": {
+      "post": {
+        "description": "Recover procedure.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Recover procedure.",
+        "operationId": "recover",
+        "parameters": [
+          {
+            "description": "Recovery request",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/internal_auth_x_recover.recoveryReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/recover/end": {
+      "post": {
+        "description": "Recover End procedure.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Recover End procedure.",
+        "parameters": [
+          {
+            "description": "Recovery End request",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/internal_auth_x_recover.recoveryEndReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "description": "### New User Register\n\n*Sample INPUT*\n\n```json\n{\n  \"email\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"password\": \"string\",\n  \"role_key\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User Registered\",\n  \"response\": {\n    \"avatar\": \"string\",\n    \"channel_ids\": [\n      \"string\"\n    ],\n    \"email\": \"string\",\n    \"first_name\": \"string\",\n    \"is_active\": true,\n    \"is_verified\": true,\n    \"last_logged_in_at\": \"string\",\n    \"last_name\": \"string\",\n    \"role_id\": \"string\",\n    \"role_key\": \"string\",\n    \"ui_config\": {\n      \"additionalProp1\": {}\n    },\n    \"usecase_ids\": [\n      \"string\"\n    ],\n    \"user_id\": \"string\",\n    \"user_name\": \"string\"\n  },\n  \"response_code\": 201\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register a new user",
+        "operationId": "register",
+        "parameters": [
+          {
+            "description": "Registration request",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/internal_auth_x_register.registerReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/status": {
+      "get": {
+        "description": "### Status Check\n\n*Sample OUTPUT*\n\n```json\n {\n  \"message\": \"STS Status\",\n  \"response\": {\n    \"auth_providers\": [\n      \"string\"\n    ],\n    \"brand_name\": \"string\",\n    \"desc\": \"string\",\n    \"is_onboarding\": true,\n    \"license_count\": 0,\n    \"nis_module\": true,\n    \"sms_module\": true,\n    \"smtp_module\": true,\n    \"sts_service\": [\n      {\n        \"additionalProp1\": {}\n      }\n    ],\n    \"version\": \"string\"\n  },\n  \"response_code\": 200\n}\n```\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Status"
+        ],
+        "summary": "Status Check",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/internal_auth_api_status.statusResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/config": {
+      "get": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User config Create\n\n*Sample INPUT*\n\n```json\n{\n  \"email\": \"string\",\n  \"role_key\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User config created\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Config By ID",
+        "parameters": [
+          {
+            "description": "User Config By ID Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userIDReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_api_user.userConfigResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "### User config Create\n\n*Sample INPUT*\n\n```json\n{\n  \"email\": \"string\",\n  \"role_key\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User config created\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Config Register",
+        "parameters": [
+          {
+            "description": "User Config Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.configCreateReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Config Update By ID\n\n*Sample INPUT*\n\n```json\n{\n  \"user_config\": {\n    \"channel_ids\": [\n      \"string\"\n    ],\n    \"customer_ids\": [\n      \"string\"\n    ],\n    \"role_id\": \"string\",\n    \"site_ids\": [\n      \"string\"\n    ],\n    \"ui_config\": {\n      \"additionalProp1\": {}\n    },\n    \"usecase_ids\": [\n      \"string\"\n    ],\n    \"user_id\": \"string\"\n  },\n  \"user_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User Config Updated\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Config Update By ID",
+        "parameters": [
+          {
+            "description": "User Config Update By ID Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userConfigReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/create": {
+      "put": {
+        "description": "### New User Register\n\n*Sample INPUT*\n\n```json\n{\n  \"email\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"password\": \"string\",\n  \"role_key\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User Registered\",\n  \"response\": {\n    \"avatar\": \"string\",\n    \"channel_ids\": [\n      \"string\"\n    ],\n    \"email\": \"string\",\n    \"first_name\": \"string\",\n    \"is_active\": true,\n    \"is_verified\": true,\n    \"last_logged_in_at\": \"string\",\n    \"last_name\": \"string\",\n    \"role_id\": \"string\",\n    \"role_key\": \"string\",\n    \"ui_config\": {\n      \"additionalProp1\": {}\n    },\n    \"usecase_ids\": [\n      \"string\"\n    ],\n    \"user_id\": \"string\",\n    \"user_name\": \"string\"\n  },\n  \"response_code\": 201\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Register",
+        "parameters": [
+          {
+            "description": "User Register Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userRegisterReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/delete": {
+      "delete": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Delete by ID\n\n*Sample INPUT*\n\n```json\n{\n  \"user_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User Deleted\",\n  \"response\": null,\n  \"response_code\": 200\n}\n\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Delete",
+        "parameters": [
+          {
+            "description": "User Update Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userDeleteReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/email_lookup": {
+      "post": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Email lookup\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User List\",\n  \"response\": [\n    {\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"response_code\": 200\n}\n\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Email Lookup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPRespArray"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/id": {
+      "post": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Get by ID\n\n*Sample INPUT*\n\n```json\n{\n  \"user_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User By ID\",\n  \"response\":{\n    \"avatar\": \"string\",\n    \"email\": \"string\",\n    \"first_name\": \"string\",\n    \"is_active\": true,\n    \"is_verified\": true,\n    \"last_logged_in_at\": \"string\",\n    \"last_name\": \"string\",\n    \"role_id\": \"string\",\n    \"role_key\": \"string\",\n    \"user_id\": \"string\",\n    \"user_name\": \"string\"\n  },\n  \"response_code\": 200\n}\n\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Get By ID",
+        "parameters": [
+          {
+            "description": "User Get By ID Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userIDReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/info": {
+      "post": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Info by Access token\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User By ID\",\n  \"response\":  {\n    \"avatar\": \"string\",\n    \"channel_ids\": [\n      \"string\"\n    ],\n    \"customer_ids\": [\n      \"string\"\n    ],\n    \"email\": \"string\",\n    \"first_name\": \"string\",\n    \"is_active\": true,\n    \"is_verified\": true,\n    \"last_logged_in_at\": \"string\",\n    \"last_name\": \"string\",\n    \"role_id\": \"string\",\n    \"role_key\": \"string\",\n    \"site_ids\": [\n      \"string\"\n    ],\n    \"ui_config\": {\n      \"additionalProp1\": {}\n    },\n    \"usecase_ids\": [\n      \"string\"\n    ],\n    \"user_id\": \"string\",\n    \"user_name\": \"string\",\n    \"user_config\": {\n      \"channel_ids\": [\n        \"string\"\n      ],\n      \"customer_ids\": [\n        \"string\"\n      ],\n      \"role_id\": \"string\",\n      \"site_ids\": [\n        \"string\"\n      ],\n      \"ui_config\": {\n        \"additionalProp1\": {}\n      },\n      \"usecase_ids\": [\n        \"string\"\n      ],\n      \"user_id\": \"string\"\n    }\n  },\n  \"response_code\": 200\n}\n\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "allOf": [
+                        {
+                          "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "user_config": {
+                              "$ref": "#/definitions/sts_internal_auth_api_user.userConfigResp"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/list": {
+      "post": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User List\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User List\",\n  \"response\": [\n    {\n      \"avatar\": \"string\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"is_active\": true,\n      \"is_verified\": true,\n      \"last_logged_in_at\": \"string\",\n      \"last_name\": \"string\",\n      \"role_id\": \"string\",\n      \"role_key\": \"string\",\n      \"user_id\": \"string\",\n      \"user_name\": \"string\"\n    }\n  ],\n  \"response_code\": 200\n}\n\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPRespArray"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/onboard/register": {
+      "put": {
+        "description": "### New User Register\n\n*Sample INPUT*\n\n```json\n{\n  \"email\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"password\": \"string\",\n  \"role_key\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User Registered\",\n  \"response\": {\n    \"avatar\": \"string\",\n    \"channel_ids\": [\n      \"string\"\n    ],\n    \"email\": \"string\",\n    \"first_name\": \"string\",\n    \"is_active\": true,\n    \"is_verified\": true,\n    \"last_logged_in_at\": \"string\",\n    \"last_name\": \"string\",\n    \"role_id\": \"string\",\n    \"role_key\": \"string\",\n    \"ui_config\": {\n      \"additionalProp1\": {}\n    },\n    \"usecase_ids\": [\n      \"string\"\n    ],\n    \"user_id\": \"string\",\n    \"user_name\": \"string\"\n  },\n  \"response_code\": 201\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Register",
+        "parameters": [
+          {
+            "description": "User Register Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userRegisterReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/session/list": {
+      "post": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Sessions\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User sessions\",\n  \"response\": {\n    \"user_id\": \"string\",\n    \"sessions\": [\n      {\n        \"sid\": \"string\",\n        \"session_expiry\": \"string\",\n        \"value\": {\n          \"mobile\": \"string\",\n          \"os\": \"string\",\n          \"browser_name\": \"string\",\n          \"user_agent\": \"string\",\n          \"browser_version\": \"string\",\n          \"fwd_ip\": \"string\",\n          \"ip\": \"string\",\n          \"uid\": \"string\"\n        }\n      }\n    ]\n  },\n  \"response_code\": 200\n}\n\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Sessions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "allOf": [
+                        {
+                          "$ref": "#/definitions/sts_internal_auth_api_user.userSessionResp"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "sessions": {
+                              "$ref": "#/definitions/sts_internal_auth_api_user.sessionResp"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/session/revoke": {
+      "delete": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Session Revoke\n\n\n*Sample INPUT*\n\n```json\n{\n  \"user_id\": \"string\",\n  \"session_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User session revoked\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "Revoke User Session",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/session/token": {
+      "post": {
+        "description": "### User Auth with return Access token\n\n*Sample INPUT*\n\n```json\n{\n  \"uuid\": \"string\",\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"token\": \"string\"\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Token Exchange",
+        "parameters": [
+          {
+            "description": "User Auth Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userAuthReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/structs.HTTPResp"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/auth/user/update": {
+      "patch": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Update by ID\n\n*Sample INPUT*\n\n```json\n{\n  \"change_password\": true,\n  \"confirm_password\": \"string\",\n  \"email\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"image\": \"string\",\n  \"password\": \"string\",\n  \"role_id\": \"string\",\n  \"user_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User Updated\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Update",
+        "parameters": [
+          {
+            "description": "User Update Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_api_user.userUpdateReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_api_user.userResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/oauth2/client/create": {
+      "put": {
+        "description": "### App Client Create API.\n\n*Sample INPUT*\n\n```json\n{\n  \"id\": \"string\",\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\",\n  \"allowed_audiences\": [],\n  \"allowed_regions\": [],\n  \"allowed_tenant_access\": [],\n  \"grant_types\": [],\n  \"response_types\": [],\n  \"scopes\": [],\n  \"public\": false,\n  \"disabled\": false,\n  \"name\": \"string\",\n  \"secret\": \"string\",\n  \"redirect_uris\": [],\n  \"owner\": \"string\",\n  \"policy_uri\": \"string\",\n  \"terms_of_service_uri\": \"string\",\n  \"client_uri\": \"string\",\n  \"logo_uri\": \"string\",\n  \"contacts\": \"string\",\n  \"published\": false,\n  \"provider\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Client created\",\n  \"response\": null,\n  \"response_code\": 201\n}\n```\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "OAuth2"
+        ],
+        "summary": "OAuth2 Client Create",
+        "parameters": [
+          {
+            "description": "Client Create Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_oauth.clientCreateReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_oauth.clientResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/oauth2/client/delete": {
+      "delete": {
+        "description": "### App Client Delete API.\n\n*Sample INPUT*\n\n```json\n{\n  \"client_id\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Client deleted\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "OAuth2"
+        ],
+        "summary": "OAuth2 Client Delete",
+        "parameters": [
+          {
+            "description": "Client Delete Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_oauth.clientIDReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/oauth2/client/update": {
+      "patch": {
+        "description": "### App Client Update API.\n\n*Sample INPUT*\n\n```json\n{\n  \"id\": \"string\",\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\",\n  \"allowed_audiences\": [],\n  \"allowed_regions\": [],\n  \"allowed_tenant_access\": [],\n  \"grant_types\": [],\n  \"response_types\": [],\n  \"scopes\": [],\n  \"public\": false,\n  \"disabled\": false,\n  \"name\": \"string\",\n  \"secret\": \"string\",\n  \"redirect_uris\": [],\n  \"owner\": \"string\",\n  \"policy_uri\": \"string\",\n  \"terms_of_service_uri\": \"string\",\n  \"client_uri\": \"string\",\n  \"logo_uri\": \"string\",\n  \"contacts\": \"string\",\n  \"published\": false,\n  \"provider\": \"string\"\n}\n```\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Client updated\",\n  \"response\": null,\n  \"response_code\": 200\n}\n```\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "OAuth2"
+        ],
+        "summary": "OAuth2 Client Update",
+        "parameters": [
+          {
+            "description": "Client Update Payload",
+            "name": "payload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sts_internal_auth_oauth.clientUpdateReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/role/list": {
+      "post": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### Role List\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"Roles List\",\n  \"response\": [\n    {\n      \"role_id\": \"string\",\n      \"role_key\": \"string\",\n      \"role_name\": \"string\"\n    }\n  ],\n  \"response_code\": 200\n}\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Role"
+        ],
+        "summary": "Role List",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPRespArray"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/internal_auth_role.roleListResp"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/user/info": {
+      "post": {
+        "security": [
+          {
+            "OAuth2Password": []
+          }
+        ],
+        "description": "### User Info by Access token\n\n*Sample OUTPUT*\n\n```json\n{\n  \"message\": \"User By ID\",\n  \"response\":  {\n    \"avatar\": \"string\",\n    \"channel_ids\": [\n      \"string\"\n    ],\n    \"customer_ids\": [\n      \"string\"\n    ],\n    \"email\": \"string\",\n    \"first_name\": \"string\",\n    \"is_active\": true,\n    \"is_verified\": true,\n    \"last_logged_in_at\": \"string\",\n    \"last_name\": \"string\",\n    \"role_id\": \"string\",\n    \"role_key\": \"string\",\n    \"site_ids\": [\n      \"string\"\n    ],\n    \"ui_config\": {\n      \"additionalProp1\": {}\n    },\n    \"usecase_ids\": [\n      \"string\"\n    ],\n    \"user_id\": \"string\",\n    \"user_name\": \"string\",\n    \"user_config\": {\n      \"channel_ids\": [\n        \"string\"\n      ],\n      \"customer_ids\": [\n        \"string\"\n      ],\n      \"role_id\": \"string\",\n      \"site_ids\": [\n        \"string\"\n      ],\n      \"ui_config\": {\n        \"additionalProp1\": {}\n      },\n      \"usecase_ids\": [\n        \"string\"\n      ],\n      \"user_id\": \"string\"\n    }\n  },\n  \"response_code\": 200\n}\n\n```",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "summary": "User Info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPResp"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "$ref": "#/definitions/sts_internal_auth_oauth.userResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/structs.HTTPError"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "response": {}
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "internal_auth_api_client.clientCreateReq": {
+      "type": "object",
+      "required": [
+        "auth_client_id",
+        "client_secret",
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auth_client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "internal_auth_api_client.clientIDReq": {
+      "type": "object",
+      "required": [
+        "client_id"
+      ],
+      "properties": {
+        "client_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_client.clientListResp": {
+      "type": "object",
+      "required": [
+        "client"
+      ],
+      "properties": {
+        "client": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/internal_auth_api_client.clientUpdateReq"
+          }
+        }
+      }
+    },
+    "internal_auth_api_client.clientUpdateReq": {
+      "type": "object",
+      "required": [
+        "auth_client_id",
+        "client_id",
+        "client_secret",
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auth_client_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "internal_auth_api_status.statusResp": {
+      "type": "object",
+      "properties": {
+        "auth_providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "internal_auth_api_user.configCreateReq": {
+      "type": "object",
+      "required": [
+        "email",
+        "role_key"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.sessionResp": {
+      "type": "object",
+      "properties": {
+        "session_expiry": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "sid": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "internal_auth_api_user.userAuthReq": {
+      "type": "object",
+      "required": [
+        "uuid"
+      ],
+      "properties": {
+        "exchange_token": {
+          "type": "string"
+        },
+        "is_session_exchange": {
+          "type": "boolean"
+        },
+        "uuid": {
+          "description": "UserEmail    string `json:\"email\" validate:\"required\"`\nUserPassword string `json:\"password\" validate:\"required\"`",
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userConfigReq": {
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_config": {
+          "$ref": "#/definitions/internal_auth_api_user.userConfigResp"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userConfigResp": {
+      "type": "object",
+      "properties": {
+        "channel_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customer_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "site_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ui_config": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "usecase_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userDeleteReq": {
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userIDReq": {
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userRegisterReq": {
+      "type": "object",
+      "required": [
+        "email",
+        "first_name",
+        "last_name",
+        "password",
+        "role_key"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userResp": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "is_verified": {
+          "type": "boolean"
+        },
+        "last_logged_in_at": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "user_config": {
+          "$ref": "#/definitions/internal_auth_api_user.userConfigResp"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "user_name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userSessionResp": {
+      "type": "object",
+      "properties": {
+        "sessions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/internal_auth_api_user.sessionResp"
+          }
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_api_user.userUpdateReq": {
+      "type": "object",
+      "required": [
+        "change_password",
+        "email",
+        "role_key",
+        "user_id"
+      ],
+      "properties": {
+        "change_password": {
+          "type": "boolean"
+        },
+        "confirm_password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_oauth.clientCreateReq": {
+      "type": "object",
+      "required": [
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "internal_auth_oauth.clientIDReq": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_oauth.clientResp": {
+      "type": "object",
+      "required": [
+        "client_id",
+        "client_secret"
+      ],
+      "properties": {
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_oauth.clientUpdateReq": {
+      "type": "object",
+      "required": [
+        "client_id",
+        "client_secret",
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "internal_auth_oauth.userResp": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "is_verified": {
+          "type": "boolean"
+        },
+        "last_logged_in_at": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "user_name": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_role.roleListResp": {
+      "type": "object",
+      "properties": {
+        "role_id": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_x_confirm.confirmReq": {
+      "type": "object",
+      "properties": {
+        "cnf": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_x_login.loginReq": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_x_recover.recoveryEndReq": {
+      "type": "object",
+      "properties": {
+        "confirm_password": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_x_recover.recoveryReq": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "internal_auth_x_register.registerReq": {
+      "type": "object",
+      "properties": {
+        "confirm_password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "structs.HTTPError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "response": {},
+        "response_code": {
+          "type": "integer"
+        }
+      }
+    },
+    "structs.HTTPResp": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "response": {},
+        "response_code": {
+          "type": "integer"
+        }
+      }
+    },
+    "structs.HTTPRespArray": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "response": {
+          "type": "array",
+          "items": {}
+        },
+        "response_code": {
+          "type": "integer"
+        }
+      }
+    },
+    "sts_internal_auth_api_client.clientCreateReq": {
+      "type": "object",
+      "required": [
+        "auth_client_id",
+        "client_secret",
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auth_client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sts_internal_auth_api_client.clientIDReq": {
+      "type": "object",
+      "required": [
+        "client_id"
+      ],
+      "properties": {
+        "client_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_client.clientListResp": {
+      "type": "object",
+      "required": [
+        "client"
+      ],
+      "properties": {
+        "client": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/sts_internal_auth_api_client.clientUpdateReq"
+          }
+        }
+      }
+    },
+    "sts_internal_auth_api_client.clientUpdateReq": {
+      "type": "object",
+      "required": [
+        "auth_client_id",
+        "client_id",
+        "client_secret",
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "auth_client_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sts_internal_auth_api_status.statusResp": {
+      "type": "object",
+      "properties": {
+        "auth_providers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "sts_internal_auth_api_user.configCreateReq": {
+      "type": "object",
+      "required": [
+        "email",
+        "role_key"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.sessionResp": {
+      "type": "object",
+      "properties": {
+        "session_expiry": {
+          "type": "string"
+        },
+        "session_id": {
+          "type": "string"
+        },
+        "sid": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userAuthReq": {
+      "type": "object",
+      "required": [
+        "uuid"
+      ],
+      "properties": {
+        "exchange_token": {
+          "type": "string"
+        },
+        "is_session_exchange": {
+          "type": "boolean"
+        },
+        "uuid": {
+          "description": "UserEmail    string `json:\"email\" validate:\"required\"`\nUserPassword string `json:\"password\" validate:\"required\"`",
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userConfigReq": {
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_config": {
+          "$ref": "#/definitions/sts_internal_auth_api_user.userConfigResp"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userConfigResp": {
+      "type": "object",
+      "properties": {
+        "channel_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customer_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "site_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ui_config": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "usecase_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userDeleteReq": {
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userIDReq": {
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userRegisterReq": {
+      "type": "object",
+      "required": [
+        "email",
+        "first_name",
+        "last_name",
+        "password",
+        "role_key"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userResp": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "is_verified": {
+          "type": "boolean"
+        },
+        "last_logged_in_at": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "user_config": {
+          "$ref": "#/definitions/sts_internal_auth_api_user.userConfigResp"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "user_name": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userSessionResp": {
+      "type": "object",
+      "properties": {
+        "sessions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/sts_internal_auth_api_user.sessionResp"
+          }
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_api_user.userUpdateReq": {
+      "type": "object",
+      "required": [
+        "change_password",
+        "email",
+        "role_key",
+        "user_id"
+      ],
+      "properties": {
+        "change_password": {
+          "type": "boolean"
+        },
+        "confirm_password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_oauth.clientCreateReq": {
+      "type": "object",
+      "required": [
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sts_internal_auth_oauth.clientIDReq": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_oauth.clientResp": {
+      "type": "object",
+      "required": [
+        "client_id",
+        "client_secret"
+      ],
+      "properties": {
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_oauth.clientUpdateReq": {
+      "type": "object",
+      "required": [
+        "client_id",
+        "client_secret",
+        "grant_type",
+        "name",
+        "provider",
+        "redirect_uri",
+        "response_type",
+        "scope"
+      ],
+      "properties": {
+        "allowed_audience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "grant_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "redirect_uri": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sts_internal_auth_oauth.userResp": {
+      "type": "object",
+      "properties": {
+        "avatar": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        },
+        "is_verified": {
+          "type": "boolean"
+        },
+        "last_logged_in_at": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "user_name": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_role.roleListResp": {
+      "type": "object",
+      "properties": {
+        "role_id": {
+          "type": "string"
+        },
+        "role_key": {
+          "type": "string"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_x_confirm.confirmReq": {
+      "type": "object",
+      "properties": {
+        "cnf": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_x_login.loginReq": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_x_recover.recoveryEndReq": {
+      "type": "object",
+      "properties": {
+        "confirm_password": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_x_recover.recoveryReq": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "sts_internal_auth_x_register.registerReq": {
+      "type": "object",
+      "properties": {
+        "confirm_password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "OAuth2Password": {
+      "type": "oauth2",
+      "flow": "password",
+      "tokenUrl": "http://localhost:8001/oauth2/token"
+    }
+  }
+}
